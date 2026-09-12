@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EletroSkills — 50 Skills + 1000 Prompts para Engenharia Elétrica</title>
+<meta name="description" content="50 skills prontas para orientar o Claude em projetos elétricos, dimensionamento, SPDA, fotovoltaico e documentação técnica, mais 1000 prompts. A partir de R$10.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#04213a;
+    --navy:#06304f;
+    --navy-2:#0a3f66;
+    --teal:#12c7c0;
+    --teal-dark:#0a9a94;
+    --orange:#f0703d;
+    --orange-2:#ff8a50;
+    --bg:#f5f8fa;
+    --card:#ffffff;
+    --border:#e3e9ee;
+    --text:#0c2438;
+    --muted:#5b6b7a;
+    --gradient-hero: linear-gradient(160deg, var(--navy-2) 0%, var(--navy-deep) 70%);
+    --gradient-electric: linear-gradient(135deg, var(--teal) 0%, var(--navy-2) 130%);
+    --gradient-orange: linear-gradient(135deg, var(--orange-2) 0%, var(--orange) 100%);
+    --shadow-teal: 0 18px 40px -14px rgba(18,199,192,.45);
+    --shadow-orange: 0 16px 32px -10px rgba(240,112,61,.55);
+    --shadow-elegant: 0 20px 50px -20px rgba(6,48,79,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;line-height:1.15}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{padding:80px 0}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(18,199,192,.5);background:rgba(18,199,192,.12);color:var(--navy);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:16px 32px;border-radius:999px;font-size:15px;border:none;cursor:pointer;transition:filter .2s,transform .2s}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn-orange{background:var(--gradient-orange);color:#3a1400;box-shadow:var(--shadow-orange)}
+  .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff}
+  .btn-block{width:100%}
+  .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* Top bar */
+  .topbar{background:var(--navy-deep);color:#cfe9ea;text-align:center;padding:10px 16px;font-size:13px;font-weight:600}
+  .topbar strong{color:var(--teal)}
+
+  /* Header / hero */
+  header{position:relative;overflow:hidden;background:var(--gradient-hero);color:#fff}
+  header::before{content:"";position:absolute;inset:0;opacity:.07;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at 50% 25%, black 30%, transparent 75%)}
+  .hero{position:relative;padding:56px 0 90px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .logo-chip{display:inline-flex;margin-bottom:26px}
+  .logo-chip img{height:46px;width:auto;border-radius:10px}
+  .hero h1{font-size:2.8rem;font-weight:800;letter-spacing:-.01em}
+  .hero h1 span{color:var(--teal)}
+  .hero p.lead{margin-top:20px;max-width:560px;color:rgba(255,255,255,.78);font-size:1.1rem}
+  .hero p.lead strong{color:#fff}
+  .hero-actions{margin-top:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .fine{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.55)}
+  .fine2{font-size:12px;color:rgba(255,255,255,.5)}
+  .hero-visual{position:relative}
+  .hero-visual .glow{position:absolute;inset:-40px;background:var(--gradient-electric);opacity:.25;filter:blur(60px);z-index:0}
+  .hero-card{position:relative;z-index:1;border:1px solid rgba(18,199,192,.35);background:rgba(255,255,255,.05);padding:16px;border-radius:28px;backdrop-filter:blur(6px)}
+  .hero-card img{border-radius:20px}
+  .price-flag{position:absolute;bottom:-18px;left:-18px;display:flex;align-items:center;gap:12px;border:1px solid rgba(18,199,192,.4);background:#08243d;padding:12px 18px;border-radius:16px;box-shadow:var(--shadow-elegant)}
+  .price-flag .icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--gradient-electric);font-size:20px}
+  .price-flag .label b{display:block;font-size:14px}
+  .price-flag .label span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.55)}
+
+  /* stats */
+  .stats{background:var(--card);border-bottom:1px solid var(--border)}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .stats-grid > div{text-align:center;padding:36px 12px;border-left:1px solid var(--border)}
+  .stats-grid > div:first-child{border-left:none}
+  .stats-grid b{font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;background:var(--gradient-electric);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stats-grid span{display:block;margin-top:4px;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+
+  /* marquee */
+  .marquee-wrap{overflow:hidden;background:linear-gradient(90deg,var(--navy-2),var(--navy-deep));padding:18px 0;border-top:1px solid rgba(18,199,192,.15);border-bottom:1px solid rgba(18,199,192,.15)}
+  .marquee{display:flex;width:max-content;gap:44px;animation:scroll 34s linear infinite;white-space:nowrap}
+  .marquee span{color:rgba(255,255,255,.85);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;display:flex;align-items:center;gap:12px}
+  .marquee span::after{content:"⚡";color:var(--teal)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* problem */
+  .problem{background:var(--card)}
+  .problem .wrap{max-width:760px}
+  .problem h2{font-size:2.2rem;text-align:center}
+  .problem-body{margin-top:28px;font-size:1.1rem}
+  .problem-body p{margin-bottom:18px;color:var(--muted)}
+  .problem-body p strong{color:var(--text)}
+  .callout{margin-top:32px;border-radius:18px;border:1px solid var(--border);background:var(--bg);padding:28px;text-align:left}
+
+  /* explanation */
+  .explain{background:var(--bg)}
+  .explain h2{font-size:2.2rem;max-width:720px;margin:0 auto}
+  .explain-card{max-width:760px;margin:40px auto 0;background:var(--card);border-radius:24px;border:1px solid var(--border);box-shadow:var(--shadow-elegant);padding:40px}
+  .explain-card .tag{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.1em}
+  .explain-card p{margin-top:16px;color:var(--muted)}
+  .explain-card p strong{color:var(--text)}
+
+  /* skills */
+  .skills-head{max-width:640px;margin:0 auto}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
+  .chip{border:1px solid rgba(18,199,192,.4);background:var(--card);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:var(--navy)}
+  .cat-block{margin-top:46px}
+  .cat-header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:1px solid var(--border);padding-bottom:16px;flex-wrap:wrap}
+  .cat-header .num{font-family:'Sora',sans-serif;font-weight:800;color:var(--teal-dark);font-size:14px}
+  .cat-header h3{font-size:1.35rem}
+  .cat-header p{font-size:12px;color:var(--muted)}
+  .cat-tag{border:1px solid rgba(18,199,192,.4);color:var(--teal-dark);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:3px 10px;border-radius:999px}
+  .skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+  .skill-card{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:box-shadow .2s,transform .2s,border-color .2s}
+  .skill-card:hover{border-color:rgba(18,199,192,.5);box-shadow:var(--shadow-teal);transform:translateY(-2px)}
+  .skill-ico{flex:none;width:38px;height:38px;border-radius:11px;background:var(--gradient-electric);display:grid;place-items:center;color:#fff;font-size:17px}
+  .skill-card h4{font-size:13.5px;font-weight:700}
+  .skill-card p{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .skills-cta{margin-top:56px;border-radius:20px;border:1px solid rgba(18,199,192,.4);background:var(--card);padding:36px;text-align:center}
+  .skills-cta p{font-weight:700;font-size:1.15rem}
+
+  /* testimonials */
+  .testi{background:var(--bg)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+  .testi-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;box-shadow:var(--shadow-elegant)}
+  .testi-stars{color:var(--orange);letter-spacing:2px;font-size:14px}
+  .testi-card p.quote{margin-top:14px;font-size:14.5px;color:var(--text)}
+  .testi-person{margin-top:20px;display:flex;align-items:center;gap:12px}
+  .testi-person img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--teal)}
+  .testi-person b{display:block;font-size:13.5px}
+  .testi-person span{display:block;font-size:11.5px;color:var(--muted)}
+
+  /* prompts */
+  .prompts{background:var(--card)}
+  .prompt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+  .prompt-card{border:1px solid var(--border);border-radius:16px;padding:24px;transition:transform .2s,box-shadow .2s}
+  .prompt-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-elegant)}
+  .prompt-tag{display:flex;align-items:center;gap:8px;color:var(--teal-dark);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+  .prompt-card h4{margin-top:12px;font-size:15px}
+  .prompt-card p{margin-top:8px;font-size:13px;color:var(--muted)}
+
+  /* steps */
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+  .step-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px}
+  .step-num{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-family:'Sora',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;background:var(--gradient-electric)}
+  .step-card h4{margin-top:20px;font-size:1.2rem}
+  .step-card p{margin-top:8px;font-size:13.5px;color:var(--muted)}
+
+  /* bonus */
+  .bonus{background:var(--navy-deep);color:#fff}
+  .bonus .eyebrow{background:var(--teal);border:2px solid var(--teal);color:#04211f;font-weight:800}
+  .bonus h2{font-size:2.6rem;font-weight:800}
+  .bonus h2 span{color:var(--teal)}
+  .bonus p.lead{color:rgba(255,255,255,.65);max-width:560px;margin:14px auto 0}
+  .bonus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
+  .bonus-card{position:relative;background:#0a3350;border:2px solid rgba(18,199,192,.5);border-radius:18px;padding:26px 20px 20px;box-shadow:var(--shadow-teal)}
+  .bonus-flag{position:absolute;top:-1px;left:0;right:0;text-align:center;padding:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;background:var(--gradient-electric);border-radius:16px 16px 0 0}
+  .bonus-card img{margin:14px auto 0;height:170px;width:auto;object-fit:contain;filter:drop-shadow(0 14px 26px rgba(0,0,0,.4))}
+  .bonus-card h4{margin-top:16px;font-size:1.02rem}
+  .bonus-card p{margin-top:8px;font-size:12.5px;color:rgba(255,255,255,.65)}
+  .bonus-card .tick{margin-top:16px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px;font-weight:800;color:var(--teal);font-size:13px}
+
+  /* aulas carousel */
+  .aulas-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-top:44px}
+  .aulas-track::-webkit-scrollbar{height:8px}
+  .aulas-track::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px}
+  .aula-card{flex:0 0 260px;scroll-snap-align:start;background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .2s}
+  .aula-card:hover{transform:translateY(-4px)}
+  .aula-card img{aspect-ratio:2/3;object-fit:cover;width:100%}
+  .aula-card .body{padding:16px}
+  .aula-card h4{font-size:1rem}
+  .aula-card p{margin-top:6px;font-size:12.5px;color:var(--muted)}
+
+  /* community */
+  .community-card{max-width:760px;margin:36px auto 0;background:var(--card);border-radius:24px;border:1px solid var(--border);box-shadow:var(--shadow-elegant);padding:36px}
+  .community-card p{color:var(--muted)}
+  .community-card p+p{margin-top:14px}
+  .community-check{margin-top:20px;display:flex;align-items:center;gap:10px;font-weight:700;color:var(--teal-dark);font-size:14px}
+
+  /* pricing */
+  .offer{position:relative;overflow:hidden;background:var(--gradient-hero);color:#fff}
+  .offer h2{font-size:2.4rem;font-weight:800}
+  .offer h2 span{color:var(--teal)}
+  .offer > .wrap > p{max-width:600px;margin:14px auto 0;color:rgba(255,255,255,.7)}
+  .pricing-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:26px;margin-top:52px;align-items:stretch}
+  .price-card{position:relative;border-radius:26px;padding:34px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.14);display:flex;flex-direction:column;text-align:left}
+  .price-card.featured{background:rgba(255,255,255,.06);border:2px solid var(--teal);box-shadow:var(--shadow-teal)}
+  .price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gradient-electric);color:#04211f;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.14em;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .price-card h3{font-size:1.3rem}
+  .price-card .desc{color:rgba(255,255,255,.6);font-size:13px;margin-top:6px}
+  .price-value{margin-top:22px;display:flex;align-items:flex-end;gap:6px}
+  .price-value .cur{font-size:1.3rem;color:rgba(255,255,255,.7);padding-bottom:6px}
+  .price-value .num{font-family:'Sora',sans-serif;font-weight:800;font-size:3.6rem;line-height:1;color:var(--teal)}
+  .price-note{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
+  .price-list{margin-top:24px;flex:1;display:flex;flex-direction:column;gap:11px}
+  .price-list li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+  .price-list li b{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(18,199,192,.2);color:var(--teal);display:grid;place-items:center;font-size:11px;margin-top:1px}
+  .price-list li.off{opacity:.4}
+  .price-list li.off b{background:rgba(255,255,255,.08);color:rgba(255,255,255,.4)}
+  .price-card .btn{margin-top:28px}
+  .btn-teal{background:var(--gradient-electric);color:#04211f;box-shadow:var(--shadow-teal)}
+
+  /* guarantee */
+  .guarantee-card{display:flex;gap:32px;align-items:center;max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:26px;padding:40px;box-shadow:var(--shadow-elegant)}
+  .guarantee-badge{flex:none;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:var(--gradient-electric);font-size:42px;box-shadow:var(--shadow-teal)}
+  .guarantee-card h3{font-size:1.5rem}
+  .guarantee-card p{margin-top:8px;color:var(--muted)}
+
+  /* closing statement */
+  .statement{background:var(--card)}
+  .statement .wrap{max-width:680px}
+  .statement h2{font-size:1.7rem}
+  .statement p{margin-top:18px;color:var(--muted);font-size:1.05rem}
+  .statement p.strong{color:var(--text);font-weight:600}
+
+  /* faq */
+  .faq{background:var(--bg)}
+  .faq-list{max-width:760px;margin:44px auto 0;display:flex;flex-direction:column;gap:10px}
+  details{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:0;overflow:hidden}
+  summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:14.5px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:20px;color:var(--teal-dark);flex:none;margin-left:12px}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 22px 20px;color:var(--muted);font-size:13.5px}
+
+  /* final cta */
+  .final-cta{background:var(--gradient-hero);color:#fff}
+  .final-cta h2{font-size:2.4rem;font-weight:800;max-width:720px;margin:0 auto}
+  .final-cta h2 span{color:var(--teal)}
+  .final-cta p{margin-top:16px;color:rgba(255,255,255,.65);max-width:520px;margin-left:auto;margin-right:auto}
+  .final-cta .btn{margin-top:34px}
+
+  footer{background:var(--card);border-top:1px solid var(--border);padding:48px 0}
+  .foot-logo{display:flex;align-items:center;gap:10px}
+  .foot-logo img{height:28px;border-radius:6px}
+  footer p{margin-top:16px;font-size:11.5px;color:var(--muted);max-width:760px;line-height:1.6}
+  footer .copy{margin-top:22px;font-size:11.5px;color:var(--muted)}
+
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-visual{order:-1}
+    .stats-grid{grid-template-columns:1fr;}
+    .stats-grid>div{border-left:none;border-top:1px solid var(--border)}
+    .stats-grid>div:first-child{border-top:none}
+    .skill-grid{grid-template-columns:repeat(2,1fr)}
+    .testi-grid{grid-template-columns:1fr}
+    .prompt-grid{grid-template-columns:1fr}
+    .steps-grid{grid-template-columns:1fr}
+    .bonus-grid{grid-template-columns:repeat(2,1fr)}
+    .pricing-grid{grid-template-columns:1fr}
+    .guarantee-card{flex-direction:column;text-align:center}
+  }
+  @media(max-width:600px){
+    .hero h1{font-size:2.1rem}
+    section{padding:60px 0}
+    .skill-grid{grid-template-columns:1fr}
+    .bonus-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">⚡ <strong>LANÇAMENTO:</strong> EletroSkills — 50 skills + 1000 prompts para engenharia elétrica</div>
+
+<header>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="logo-chip"><img src="assets/logo.png" alt="EletroSkills — Skills para Claude"></div>
+        <h1>Pare de começar do zero cada memorial, laudo e proposta elétrica<span>.</span></h1>
+        <p class="lead">Receba <strong>50 skills prontas</strong> para orientar o Claude em projetos elétricos, dimensionamento, SPDA, fotovoltaico e documentação técnica — mais <strong>1000 prompts</strong> para as demandas do dia a dia. Você fornece os dados e recebe uma primeira versão estruturada para conferir, ajustar e finalizar.</p>
+        <div class="hero-actions">
+          <a href="#oferta" class="btn btn-orange">Quero o pacote <span class="arrow">→</span></a>
+          <p class="fine">Pagamento único · Acesso imediato · Garantia de 7 dias</p>
+          <p class="fine2">A assinatura do Claude é contratada separadamente com a Anthropic e não está incluída no valor do pacote.</p>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <div class="hero-card">
+          <img src="assets/hero-bundle.png" alt="Pacote EletroSkills — skills, planilhas e guias para engenharia elétrica">
+          <div class="price-flag">
+            <span class="icon">⚡</span>
+            <span class="label"><b>50 skills + 1000 prompts</b><span>A partir de R$10</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div><b>50</b><span>Skills elétricas</span></div>
+    <div><b>1000</b><span>Prompts avançados</span></div>
+    <div><b>4</b><span>Bônus inclusos</span></div>
+  </div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section class="problem">
+  <div class="wrap">
+    <h2>Você não estudou anos de engenharia para reescrever a mesma estrutura de memorial a cada projeto.</h2>
+    <div class="problem-body">
+      <p>Mas, entre organizar dados, montar documentos e responder clientes, boa parte do expediente vai embora.</p>
+      <p><strong>Quando finalmente sobra tempo para analisar o projeto, já passou da hora de encerrar.</strong></p>
+      <p>E pedir ajuda à IA nem sempre resolve: sem informações suficientes e instruções claras, a resposta pode vir genérica e exigir mais trabalho de revisão.</p>
+      <div class="callout">
+        <p style="margin:0">As skills entregam uma base de instruções para essas tarefas. Você informa os dados do trabalho e orienta o Claude com um contexto específico para engenharia elétrica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="explain center">
+  <div class="wrap">
+    <h2>Instruções prontas para usar o Claude <span style="color:var(--teal-dark)">nas tarefas do seu escritório.</span></h2>
+    <div class="explain-card">
+      <div class="tag">⚡ EletroSkills · Skills para Claude</div>
+      <p style="text-align:left">O EletroSkills reúne <strong>50 skills</strong>: conjuntos de instruções para orientar o Claude em tarefas específicas, com contexto e formato de resposta definidos.</p>
+      <p style="text-align:left">Você escolhe a skill, configura conforme o guia e informa os dados da tarefa. O Claude gera uma primeira versão para você conferir e desenvolver.</p>
+      <p style="text-align:left">Junto, você recebe uma <strong>biblioteca com 1000 prompts</strong> para pedidos pontuais, como estruturar um parecer, responder um cliente, organizar uma reunião ou preparar uma proposta.</p>
+      <p style="text-align:left">Você continua responsável pela análise, pelas decisões e pela validação técnica. O pacote ajuda a organizar e adiantar a preparação do trabalho.</p>
+      <div class="center" style="margin-top:26px"><a href="#oferta" class="btn btn-orange">Quero o pacote <span class="arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" style="background:var(--card)">
+  <div class="wrap">
+    <div class="skills-head center">
+      <h2 style="font-size:2.2rem">50 skills organizadas pelas tarefas do seu escritório.</h2>
+      <p class="muted">Encontre as instruções para a tarefa que você precisa adiantar. As 50 skills estão no Pacote Completo, organizadas em cinco frentes de trabalho.</p>
+      <div class="chips">
+        <span class="chip">Memoriais e ART CREA</span>
+        <span class="chip">Dimensionamento de Cabos</span>
+        <span class="chip">Projeto Elétrico BT</span>
+        <span class="chip">Laudos NR-10 / NR-12</span>
+        <span class="chip">Fotovoltaica</span>
+        <span class="chip">Orçamento Elétrico</span>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="num">01</span>
+          <div><h3>Projeto &amp; Dimensionamento</h3><p>Do unifilar ao memorial</p></div>
+        </div>
+        <span class="cat-tag">10 skills</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="skill-ico">⚡</span><div><h4>Projeto Elétrico BT</h4><p>Dimensionamento, unifilar e quadro de cargas na NBR 5410.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔌</span><div><h4>Projeto Elétrico MT/AT</h4><p>Subestações, entradas de MT e memoriais NBR 14039.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🏭</span><div><h4>Projeto Industrial</h4><p>Galpões, cargas motrizes, partida de motores e proteções.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🏢</span><div><h4>Projeto Predial</h4><p>Edifícios residenciais/comerciais, prumadas e medição.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔗</span><div><h4>Dimensionamento de Cabos</h4><p>Condutores por capacidade, queda de tensão e curto-circuito.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">⚡</span><div><h4>Subestação Abrigada</h4><p>Layout, cubículos, transformador e malha de aterramento.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📟</span><div><h4>Estudo de Curto-Circuito</h4><p>Correntes de falta, impedâncias e verificação de equipamentos.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🛡️</span><div><h4>Coordenação de Proteções</h4><p>Ajustes de disjuntores, relés, fusíveis e seletividade.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📡</span><div><h4>Aterramento</h4><p>Malhas, resistividade e estratificação de solo NBR 15751.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">💡</span><div><h4>Luminotécnica</h4><p>Iluminância NBR 8995, distribuição de luminárias e memorial.</p></div></div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="num">02</span>
+          <div><h3>Segurança &amp; Conformidade</h3><p>Laudos, normas e ART</p></div>
+        </div>
+        <span class="cat-tag">10 skills</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="skill-ico">⚠️</span><div><h4>Laudos NR-10 / NR-12</h4><p>Conformidade, plano de ação e adequação de instalações.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">⚡</span><div><h4>SPDA</h4><p>Para-raios e memorial conforme NBR 5419.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🛡️</span><div><h4>Arco Elétrico (NFPA 70E)</h4><p>Energia incidente, EPIs e etiquetagem de painéis.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🏭</span><div><h4>Áreas Classificadas</h4><p>Zonas, equipamentos Ex e instalações NBR IEC 60079.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🚨</span><div><h4>Alarme e Incêndio</h4><p>Detecção NBR 17240 e iluminação de emergência NBR 10898.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">👷</span><div><h4>Segurança do Trabalho</h4><p>APR, PT, risco elétrico e EPI/EPC em BT/MT/AT.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">👷</span><div><h4>Treinamento e Procedimentos</h4><p>Material NR-10, procedimentos e instruções de trabalho.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔍</span><div><h4>Perícia Elétrica</h4><p>Laudos periciais e análise de sinistros elétricos.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📋</span><div><h4>Memoriais e ART CREA</h4><p>Memorial descritivo, cálculo e regularização no CREA.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📄</span><div><h4>Normas e Consultas</h4><p>Resumo prático de NBRs, NRs e resoluções ANEEL.</p></div></div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="num">03</span>
+          <div><h3>Energia &amp; Sustentabilidade</h3><p>Geração, storage e custo</p></div>
+        </div>
+        <span class="cat-tag">10 skills</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="skill-ico">☀️</span><div><h4>Fotovoltaica</h4><p>On/off-grid, string, inversor e homologação.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">☀️</span><div><h4>Usina Solar (UFV)</h4><p>Usinas de médio/grande porte, arranjos e conexão MT.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🌬️</span><div><h4>Energia Eólica</h4><p>Viabilidade eólica, microgeração e conexão à rede.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔋</span><div><h4>Armazenamento (BESS)</h4><p>Baterias, híbrido solar + storage e backup crítico.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔌</span><div><h4>Mobilidade Elétrica</h4><p>Infra de recarga EVSE, demanda e comunicação OCPP.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">💡</span><div><h4>Eficiência Energética</h4><p>Diagnóstico energético, retrofit e análise tarifária.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📈</span><div><h4>Análise Tarifária</h4><p>Enquadramento, mercado livre e simulação de economia.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📊</span><div><h4>Qualidade de Energia</h4><p>Harmônicos, fator de potência, afundamentos e correção.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">⛽</span><div><h4>Geradores e Nobreaks</h4><p>Grupo gerador, GMG, nobreaks e sincronismo.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📈</span><div><h4>Viabilidade Econômica</h4><p>Payback, TIR, VPL e comparativo de cenários.</p></div></div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="num">04</span>
+          <div><h3>Automação, Infra &amp; TI</h3><p>Comando, supervisão e infra</p></div>
+        </div>
+        <span class="cat-tag">10 skills</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="skill-ico">🧠</span><div><h4>Automação e Comandos</h4><p>CLP, comandos elétricos e lógica de intertravamento.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🧠</span><div><h4>SCADA e Supervisório</h4><p>Arquitetura, tags, telemetria e integração com CLPs.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📶</span><div><h4>Redes Industriais</h4><p>Profibus, Profinet, Modbus e EtherNet/IP.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🏢</span><div><h4>Automação Predial</h4><p>BMS, iluminação inteligente, KNX/DALI e sistemas prediais.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔧</span><div><h4>Motores e Acionamentos</h4><p>Motores, inversores, soft-starter e curvas de conjugado.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🖥️</span><div><h4>Data Center e TI</h4><p>Infra de servidores, UPS, redundância N+1 e PDU.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📶</span><div><h4>Telecom e Cabeamento</h4><p>Cabeamento estruturado, fibra e infra de telecom.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🚨</span><div><h4>CFTV e Controle de Acesso</h4><p>Segurança eletrônica, PoE e dimensionamento de rack.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔋</span><div><h4>Bancos de Baterias CC</h4><p>Corrente contínua, retificadores e autonomia em subestações.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🌡️</span><div><h4>Climatização Elétrica</h4><p>Cargas HVAC, quadros dedicados e partida de compressores.</p></div></div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="num">05</span>
+          <div><h3>Obra, Manutenção &amp; Gestão</h3><p>Campo, execução e comercial</p></div>
+        </div>
+        <span class="cat-tag">10 skills</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><span class="skill-ico">🔧</span><div><h4>Manutenção Elétrica</h4><p>Preventiva, preditiva, checklists e ordens de serviço.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🌡️</span><div><h4>Termografia</h4><p>Inspeção termográfica de painéis e conexões.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📋</span><div><h4>Comissionamento</h4><p>Testes, energização, TAF/TAC e relatórios.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📋</span><div><h4>Gerenciamento de Obra</h4><p>Cronograma, diário de obra, medições e escopo.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🧮</span><div><h4>Orçamento Elétrico</h4><p>Composições, BDI e custos de propostas elétricas.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📄</span><div><h4>Documentação As-Built</h4><p>Atualização de projetos executados e dossiê de entrega.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">🔗</span><div><h4>Redes de Distribuição</h4><p>Rede aérea/subterrânea, postes e padrões de concessionária.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">📡</span><div><h4>Medição e Faturamento</h4><p>Padrões de entrada, TCs/TPs e regras da distribuidora.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">✉️</span><div><h4>Comercial Elétrica</h4><p>Propostas, escopos e e-mails que fecham.</p></div></div>
+        <div class="skill-card"><span class="skill-ico">✉️</span><div><h4>Relacionamento com Cliente</h4><p>Follow-up, atas e comunicação de obra.</p></div></div>
+      </div>
+    </div>
+
+    <div class="skills-cta">
+      <p>As 50 skills e os 1000 prompts fazem parte do Pacote Completo, por R$27.</p>
+      <a href="#oferta" class="btn btn-orange" style="margin-top:16px">Quero o pacote <span class="arrow">→</span></a>
+      <p class="muted" style="margin-top:10px;font-size:12px">Pagamento único · 7 dias de garantia</p>
+    </div>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap center">
+    <div class="eyebrow">⭐ Depoimentos</div>
+    <h2 style="margin-top:20px;font-size:2.2rem">Engenheiros e técnicos que já usam <span style="color:var(--teal-dark)">o EletroSkills no dia a dia.</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Uso a skill de memorial descritivo em praticamente todo projeto BT que assino. O que levava uma tarde para montar, hoje eu reviso em menos de uma hora."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/carlosmendes.webp" alt="Carlos Mendes">
+          <div><b>Carlos Mendes</b><span>Engenheiro Eletricista · Belo Horizonte/MG</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Os laudos de NR-10 ficaram muito mais rápidos de estruturar. Eu ainda confiro cada item em campo, mas o documento já sai organizado do jeito que eu entrego ao cliente."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/robertosilva.webp" alt="Roberto Silva">
+          <div><b>Roberto Silva</b><span>Engenheiro Eletricista · Curitiba/PR</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"A skill de orçamento elétrico me ajudou a padronizar as propostas do escritório. Ficou mais fácil comparar composições e justificar o preço para o cliente."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/diegooliveira.webp" alt="Diego Oliveira">
+          <div><b>Diego Oliveira</b><span>Técnico em Eletrotécnica · Campinas/SP</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Trabalho com projetos residenciais e comerciais pequenos, e os 1000 prompts resolvem muita coisa do dia a dia: e-mail de cliente, ata de reunião, checklist de vistoria."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/julianasantos.webp" alt="Juliana Santos">
+          <div><b>Juliana Santos</b><span>Engenheira Eletricista · Recife/PE</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"A skill de fotovoltaica me deu uma base sólida para organizar dimensionamento de string e memorial antes de enviar para homologação. Economizo bastante tempo de revisão."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/anapaula.webp" alt="Ana Paula">
+          <div><b>Ana Paula</b><span>Engenheira Eletricista · Porto Alegre/RS</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Comecei pelo pacote simples só para testar e migrei para o completo na mesma semana. As planilhas de bônus sozinhas já valem o valor do pacote completo."</p>
+        <div class="testi-person">
+          <img src="assets/depoimentos/fernandalima.webp" alt="Fernanda Lima">
+          <div><b>Fernanda Lima</b><span>Engenheira Eletricista · Salvador/BA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prompts">
+  <div class="wrap center">
+    <div class="eyebrow">✨ Biblioteca com 1000 prompts avançados</div>
+    <h2 style="margin-top:20px;font-size:2.2rem">Comandos prontos para os <span style="color:var(--teal-dark)">pedidos pontuais do dia a dia.</span></h2>
+    <p class="muted" style="max-width:640px;margin:14px auto 0">Enquanto as skills orientam tarefas recorrentes, os prompts ajudam em pedidos específicos: estruturar um parecer, responder um cliente, resumir uma reunião ou preparar um checklist.</p>
+    <div class="prompt-grid" style="text-align:left">
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>Parecer técnico</h4><p>Organize uma primeira versão com a questão apresentada, os dados disponíveis e os pontos de análise.</p></div>
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>E-mail difícil para o cliente</h4><p>Prepare mensagens sobre cobrança, atraso ou mudança de escopo com clareza e postura profissional.</p></div>
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>Resumo de reunião</h4><p>Transforme a transcrição fornecida em uma ata com decisões, pendências e responsáveis.</p></div>
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>Argumentação técnica</h4><p>Estruture os argumentos e os pontos que precisam de fundamentação e conferência.</p></div>
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>Checklist de vistoria</h4><p>Prepare uma lista inicial para adaptar ao tipo de instalação e ao escopo da visita.</p></div>
+      <div class="prompt-card"><div class="prompt-tag">⚡ Prompt</div><h4>Análise de proposta concorrente</h4><p>Compare escopos, identifique diferenças e organize os pontos que merecem atenção.</p></div>
+    </div>
+    <p class="muted" style="max-width:640px;margin:26px auto 0;font-size:13px">+ outros 994 prompts cobrindo proposta comercial, comunicação com fornecedor, revisão de contrato, relatório executivo, homologação junto à concessionária e mais.</p>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:30px">Quero o pacote <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="steps" style="background:var(--bg)">
+  <div class="wrap center">
+    <h2 style="font-size:2.2rem">Configure com o passo a passo e <span style="color:var(--teal-dark)">comece pela sua primeira tarefa.</span></h2>
+    <p class="muted">O pacote completo inclui guia ilustrado e aulas para acompanhar a configuração e começar a usar as skills.</p>
+    <div class="steps-grid" style="text-align:left">
+      <div class="step-card"><div class="step-num">1</div><h4>Acesse o Claude</h4><p>Entre na sua conta e confira os requisitos indicados no guia.</p></div>
+      <div class="step-card"><div class="step-num">2</div><h4>Configure a skill escolhida</h4><p>Siga o passo a passo usando as instruções fornecidas no pacote.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h4>Envie os dados da tarefa</h4><p>Descreva o que precisa, forneça as informações necessárias e confira a resposta antes de utilizá-la.</p></div>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:44px">Quero o pacote <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="bonus center">
+  <div class="wrap">
+    <div class="eyebrow">🎁 Incluídos no Pacote Completo</div>
+    <h2 style="margin-top:20px">Seu pacote completo também inclui <span>estes quatro bônus.</span></h2>
+    <p class="lead">Materiais complementares para dimensionamento, orçamento e uso de IA no trabalho.</p>
+    <div class="bonus-grid" style="text-align:left">
+      <div class="bonus-card">
+        <span class="bonus-flag">🎁 Bônus 1</span>
+        <div class="center"><img src="assets/bonus1.png" alt="Planilha de Dimensionamento Elétrico"></div>
+        <h4>Planilha de Dimensionamento Elétrico</h4>
+        <p>Organize os dados e gere um pré-dimensionamento de condutores, disjuntores, queda de tensão, curto-circuito e quadro de cargas para conferir e revisar.</p>
+        <div class="tick">Incluído no Pacote Completo</div>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-flag">🎁 Bônus 2</span>
+        <div class="center"><img src="assets/bonus2.png" alt="Planilha de Orçamento e Gestão de Obras Elétricas"></div>
+        <h4>Planilha de Orçamento e Gestão de Obras Elétricas</h4>
+        <p>Reúna orçamento, materiais, mão de obra, cronograma e acompanhamento financeiro da obra em uma planilha.</p>
+        <div class="tick">Incluído no Pacote Completo</div>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-flag">🎁 Bônus 3</span>
+        <div class="center"><img src="assets/bonus3.png" alt="Agentes para Engenharia Elétrica"></div>
+        <h4>Agentes para Engenharia Elétrica</h4>
+        <p>Fluxos de agentes prontos — análise, dimensionamento, documentação e revisão — para acelerar tarefas recorrentes.</p>
+        <div class="tick">Incluído no Pacote Completo</div>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-flag">🎁 Bônus 4</span>
+        <div class="center"><img src="assets/bonus4.png" alt="Prompt Mestre de Engenharia Elétrica"></div>
+        <h4>Prompt Mestre de Engenharia Elétrica</h4>
+        <p>Use um modelo de instruções para organizar contexto, dados da tarefa e formato de resposta ao preparar seus próprios pedidos.</p>
+        <div class="tick">Incluído no Pacote Completo</div>
+      </div>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:48px">Quero o pacote <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="aulas" style="background:var(--card)">
+  <div class="wrap center">
+    <div class="eyebrow">▶ Inclusas no Pacote Completo</div>
+    <h2 style="margin-top:20px;font-size:2.2rem">Aulas de como usar o <span style="color:var(--teal-dark)">EletroSkills na engenharia elétrica.</span></h2>
+    <p class="muted">Aprenda a configurar as skills e aplicar o pacote nas suas primeiras tarefas, com aulas práticas e passo a passo.</p>
+    <div class="aulas-track">
+      <div class="aula-card">
+        <img src="assets/aula1.png" alt="Comece Aqui">
+        <div class="body"><h4>Comece Aqui</h4><p>Como acessar a plataforma e dar os primeiros passos no Claude.</p></div>
+      </div>
+      <div class="aula-card">
+        <img src="assets/aula2.png" alt="Skills prontas para usar no Claude">
+        <div class="body"><h4>Instalando as Skills</h4><p>Acompanhe o processo de configuração das skills do pacote.</p></div>
+      </div>
+      <div class="aula-card">
+        <img src="assets/aula3.png" alt="Use o Claude com critério técnico">
+        <div class="body"><h4>Use o Claude com Critério Técnico</h4><p>Boas práticas para fornecer contexto, organizar pedidos e revisar respostas.</p></div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:12px;margin-top:6px">Arraste para o lado para ver mais →</p>
+  </div>
+</section>
+
+<section class="community center" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="eyebrow">👥 Incluso no Pacote Completo</div>
+    <h2 style="margin-top:20px;font-size:2.2rem">Comunidade de <span style="color:var(--teal-dark)">engenheiros eletricistas usando IA no dia a dia.</span></h2>
+    <div class="community-card">
+      <p style="text-align:left">Um espaço fechado para trocar experiências, compartilhar prompts e conversar sobre a aplicação do Claude nas tarefas da engenharia elétrica.</p>
+      <p style="text-align:left">Compartilhe dúvidas e exemplos de uso com outros participantes.</p>
+      <div class="community-check">✓ A comunidade está incluída no Pacote Completo, sem custo extra.</div>
+    </div>
+  </div>
+</section>
+
+<div id="oferta" class="offer">
+  <section class="center">
+    <div class="wrap">
+      <h2>Escolha o pacote ideal <span>para o seu momento.</span></h2>
+      <p>Do teste rápido com as skills essenciais até o acesso completo com bônus, aulas e comunidade — pagamento único, sem mensalidade.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Pacote Simples</h3>
+          <p class="desc">Para experimentar o EletroSkills nas tarefas mais recorrentes.</p>
+          <div class="price-value"><span class="cur">R$</span><span class="num">10</span></div>
+          <p class="price-note">pagamento único · acesso imediato · PIX ou cartão</p>
+          <ul class="price-list">
+            <li><b>✓</b> 15 skills essenciais (Projeto BT, Dimensionamento, Laudos NR-10/12, SPDA, Memoriais e ART, Fotovoltaica e mais)</li>
+            <li><b>✓</b> Biblioteca com 200 prompts avançados</li>
+            <li><b>✓</b> Guia de configuração passo a passo</li>
+            <li class="off"><b>–</b> Aulas de configuração</li>
+            <li class="off"><b>–</b> Bônus (planilhas, agentes e prompt mestre)</li>
+            <li class="off"><b>–</b> Comunidade fechada</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-block">Quero o pacote simples</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="price-badge">⚡ Mais completo</span>
+          <h3>Pacote Completo</h3>
+          <p class="desc">Todas as skills, os bônus, as aulas e a comunidade.</p>
+          <div class="price-value"><span class="cur">R$</span><span class="num">27</span></div>
+          <p class="price-note">pagamento único · acesso de 1 ano ao app · PIX ou cartão</p>
+          <ul class="price-list">
+            <li><b>✓</b> As 50 skills de engenharia elétrica</li>
+            <li><b>✓</b> Biblioteca com 1000 prompts</li>
+            <li><b>✓</b> Aulas de como usar o Claude na engenharia elétrica</li>
+            <li><b>✓</b> Bônus 1: Planilha de Dimensionamento Elétrico</li>
+            <li><b>✓</b> Bônus 2: Planilha de Orçamento e Gestão de Obras</li>
+            <li><b>✓</b> Bônus 3: Agentes para Engenharia Elétrica</li>
+            <li><b>✓</b> Bônus 4: Prompt Mestre de Engenharia Elétrica</li>
+            <li><b>✓</b> Comunidade de engenheiros eletricistas</li>
+          </ul>
+          <a href="#" class="btn btn-teal btn-block">Quero o pacote completo</a>
+        </div>
+      </div>
+
+      <p class="fine2" style="margin-top:26px">A assinatura do Claude é contratada separadamente com a Anthropic e não está incluída no valor dos pacotes.</p>
+    </div>
+  </section>
+</div>
+
+<section class="guarantee" style="background:var(--card)">
+  <div class="wrap">
+    <div class="guarantee-card">
+      <div class="guarantee-badge">🛡️</div>
+      <div>
+        <h3>7 dias de garantia incondicional</h3>
+        <p class="muted">Acesse o pacote e experimente por 7 dias. Se decidir que não é para você, solicite o reembolso pelo canal informado na compra.</p>
+        <div style="margin-top:16px;display:flex;gap:20px;flex-wrap:wrap;font-size:13px" class="muted">
+          <span>✓ 7 dias completos</span><span>✓ Reembolso integral</span>
+        </div>
+        <a href="#oferta" class="btn btn-orange" style="margin-top:20px">Quero experimentar o pacote <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statement" style="background:var(--bg)">
+  <div class="wrap">
+    <h2>Você conduz o trabalho. O Claude ajuda a preparar a base.</h2>
+    <p>O pacote oferece instruções para apoiar a preparação de documentos e outras tarefas recorrentes da engenharia elétrica.</p>
+    <p>Você fornece os dados, confere cálculos e referências, ajusta a resposta ao projeto e decide o que pode ser utilizado.</p>
+    <p class="strong">A análise e a responsabilidade técnica continuam com o profissional habilitado.</p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap center">
+    <h2 style="font-size:2.2rem">Perguntas frequentes</h2>
+    <div class="faq-list" style="text-align:left">
+      <details><summary>Qual a diferença entre o Pacote Simples e o Pacote Completo?</summary><p>O Pacote Simples (R$10) inclui 15 skills essenciais e 200 prompts, ideal para testar o método. O Pacote Completo (R$27) inclui as 50 skills, os 1000 prompts, os 4 bônus, as aulas e a comunidade fechada.</p></details>
+      <details><summary>Preciso saber usar IA?</summary><p>Não. O guia de configuração explica o passo a passo, e as skills já vêm com o contexto necessário para orientar o Claude.</p></details>
+      <details><summary>O que recebo na compra?</summary><p>Acesso digital imediato às skills, à biblioteca de prompts e, no Pacote Completo, também aos bônus, às aulas e à comunidade.</p></details>
+      <details><summary>Onde as skills funcionam?</summary><p>As skills funcionam dentro do Claude, da Anthropic. Você as configura seguindo o guia incluso no pacote.</p></details>
+      <details><summary>Preciso de um plano pago do Claude?</summary><p>A assinatura do Claude é contratada separadamente com a Anthropic e não está incluída no valor dos pacotes.</p></details>
+      <details><summary>Serve para autônomos e escritórios?</summary><p>Sim. O material foi organizado para engenheiros eletricistas, técnicos e escritórios de projeto e manutenção elétrica.</p></details>
+      <details><summary>As respostas precisam de revisão?</summary><p>Sim. As respostas geradas são um ponto de partida para você conferir, ajustar e validar tecnicamente antes de utilizar.</p></details>
+      <details><summary>Como recebo o acesso?</summary><p>Após a confirmação do pagamento, você recebe o acesso e as instruções por e-mail.</p></details>
+      <details><summary>Como solicito o reembolso?</summary><p>Basta entrar em contato pelo canal informado na confirmação da compra dentro do prazo de 7 dias.</p></details>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:40px">Ver os pacotes disponíveis <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="final-cta center">
+  <div class="wrap">
+    <h2>Seu próximo memorial não precisa <span>começar numa página em branco.</span></h2>
+    <p>Escolha o pacote ideal para o seu momento — a partir de R$10 — e comece pela sua próxima tarefa.</p>
+    <a href="#oferta" class="btn btn-orange">Quero o pacote <span class="arrow">→</span></a>
+    <p class="fine2" style="margin-top:20px">Pagamento único · Acesso imediato · Garantia de 7 dias</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo"><img src="assets/logo.png" alt="EletroSkills"></div>
+    <p>Este produto é um acesso digital imediato que disponibiliza instruções de configuração (skills) para uso no Claude da Anthropic, voltadas para engenharia elétrica. Os resultados podem variar conforme o uso. O material não substitui o julgamento profissional do engenheiro habilitado nem a responsabilidade técnica (ART/RRT). Este produto não possui vínculo institucional com a Anthropic.</p>
+    <p class="copy">© 2026 EletroSkills · Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  var words = ["PROJETO ELÉTRICO","NBR 5410","NBR 14039","NR-10","NR-12","DIMENSIONAMENTO","QUADRO DE CARGAS","SPDA / NBR 5419","LAUDO NR-10","ART CREA","MEMORIAL DE CÁLCULO","EFICIÊNCIA ENERGÉTICA","FOTOVOLTAICO","1000 PROMPTS AVANÇADOS"];
+  var html = words.map(function(w){return "<span>"+w+"</span>"}).join("");
+  document.getElementById("marquee").innerHTML = html + html;
+</script>
+</body>
+</html>
